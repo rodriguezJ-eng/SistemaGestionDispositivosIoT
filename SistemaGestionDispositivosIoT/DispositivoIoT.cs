@@ -48,16 +48,29 @@ public abstract class DispositivosIoT
         protected set => _encendido = value;
     }
 
-    public int NivelBateria
+    
+        public int NivelBateria
     {
         get => _nivelBateria;
         set
         {
-            if (value < 0 || value > 100)
-                throw new ArgumentOutOfRangeException("El nivel de batería debe estar entre 0 y 100.");
-            _nivelBateria = value;
+            if (value < 0)
+            {
+                Console.WriteLine($"[ALERTA - {Nombre}]: Batería negativa ({value}%). Ajustando al mínimo: 0%.");
+                _nivelBateria = 0;
+            }
+            else if (value > 100)
+            {
+                Console.WriteLine($"[ALERTA - {Nombre}]: Batería excede el límite ({value}%). Ajustando al máximo: 100%.");
+                _nivelBateria = 100; 
+            }
+            else
+            {
+                _nivelBateria = value;
+            }
         }
-    }
+    
+}
 
     // Métodos
     public void Encender()
@@ -77,5 +90,20 @@ public abstract class DispositivosIoT
         Console.WriteLine($"[{Nombre}] Dispositivo APAGADO");
     }
 
-    //TODO: Métodos abstractos
+    // aqui tenemos una configuración estándar general
+    public void Configurar()
+    {
+        Console.WriteLine($"[{Nombre}] Aplicando configuración automática estándar.");
+    }
+
+    //tenemos un metodo sobrecargado, sobre la Configuración personalizada segun el área de la casa o logar
+    //  donde se instale
+    public virtual void Configurar(string ubicacion)
+    {
+    
+        Console.WriteLine($"[{Nombre}] Registrado y optimizado para el área: {ubicacion}.");
+    }
+    
+    // Nuestro metodo abstracto
+    public abstract void ReportarEstado();
 }
