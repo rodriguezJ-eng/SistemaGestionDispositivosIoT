@@ -11,7 +11,14 @@ public abstract class DispositivosIoT
     private bool _encendido;
     private int _nivelBateria;
 
-    protected DispositivosIoT(string id, string nombre, bool encendido, int nivelBateria)
+    /// <summary>
+    /// Correción se eliminó el parámetro 'encendido' porque siempre ignoraba la asignación
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="nombre"></param>
+    /// <param name="encendido"></param>
+    /// <param name="nivelBateria"></param>
+    protected DispositivosIoT(string id, string nombre, int nivelBateria)
     {
         Id = id;
         Nombre = nombre;
@@ -19,7 +26,7 @@ public abstract class DispositivosIoT
         NivelBateria = nivelBateria;
     }
 
-    // propiedades
+    // propiedades y validaciones
     public string Id
     {
         get => _id;
@@ -90,13 +97,13 @@ public abstract class DispositivosIoT
         Console.WriteLine($"[{Nombre}] Dispositivo APAGADO");
     }
 
-    // aqui tenemos una configuración estándar general
+    //Sobrecarga 1: Configuración estándar sin parámetro
     public void Configurar()
     {
         Console.WriteLine($"[{Nombre}] Aplicando configuración automática estándar.");
     }
 
-    //tenemos un metodo sobrecargado, sobre la Configuración personalizada segun el área de la casa o logar
+    //Sobrecarga2: tenemos un metodo sobrecargado, sobre la Configuración personalizada segun el área de la casa o logar
     //  donde se instale
     public virtual void Configurar(string ubicacion)
     {

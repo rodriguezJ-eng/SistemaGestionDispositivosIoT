@@ -6,8 +6,8 @@ public class LuzInteligente : DispositivosIoT
     {
         private int _intensidad;
 
-        public LuzInteligente(string id, string nombre, bool encendido, int nivelBateria, int intensidadInicial)
-            : base(id, nombre, encendido, nivelBateria)
+        public LuzInteligente(string id, string nombre, int nivelBateria, int intensidadInicial)
+            : base(id, nombre, nivelBateria)
         {
             Intensidad = intensidadInicial; 
         }
@@ -35,10 +35,14 @@ public class LuzInteligente : DispositivosIoT
         }
     //  Se sella el método para garantizar que ninguna subclase
     //  futura altere la lógica estandarizada de ubicación.
-    public sealed override void Configurar(string ubicacion)
-        {
-            Console.WriteLine($"[{Nombre}]: Intensidad regulada al {Intensidad}% y vinculada a: {ubicacion}.");
-        }
+    // Nuevo
+    /*
+     * creare una nueva clase donde metere el sealed ahi (nuevo dispositivo)
+     */
+    public override void Configurar(string ubicacion)
+    {
+        Console.WriteLine($"[{Nombre}]: Intensidad regulada al {Intensidad}% y vinculada a: {ubicacion}.");
+    }
 
         public override void ReportarEstado()
         {

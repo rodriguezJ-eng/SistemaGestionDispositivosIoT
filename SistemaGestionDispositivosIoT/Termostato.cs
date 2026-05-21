@@ -5,14 +5,28 @@ public class Termostato : DispositivosIoT
 {
     private double _temperaturaObjetivo;
 
-    public Termostato(string id, string nombre, bool encendido, int nivelBateria, double temperaturaInicial)
-        : base(id, nombre, encendido, nivelBateria)
+    public Termostato(string id, string nombre, int nivelBateria, double temperaturaInicial)
+        : base(id, nombre,nivelBateria)
     {
         TemperaturaObjetivo = temperaturaInicial;
     }
 
 
-       public double TemperaturaObjetivo
+    public override void Configurar(string parametro)
+    {
+        if (double.TryParse(parametro, out double nuevaTemp))
+        {
+            TemperaturaObjetivo = nuevaTemp;
+            Console.WriteLine($"[{Nombre}]: Temperatura objetivo actualizada a {TemperaturaObjetivo} ºC.");
+        }
+        else
+        {
+            Console.WriteLine($"[{Nombre}]: Valor '{parametro}' no válido para temperatura");
+        }
+    }
+
+    // Decidir que hacer con esto 
+    public double TemperaturaObjetivo
     {
         get => _temperaturaObjetivo;
         set
@@ -33,6 +47,9 @@ public class Termostato : DispositivosIoT
             }
         }
     }
+    /// <summary>
+    /// ////////////////
+    /// </summary>
     public override void ReportarEstado()
     {
         string mensajeEstado = Encendido ? "ENCENDIDO y Climatizando la habitación" : "APAGADO y en modo de ahorro";
