@@ -54,20 +54,3 @@ public sealed class CerraduraDigital : DispositivosIoT
         Console.WriteLine("------------------------------------------------");
     }
 }
-
-    /* ── INTENTO COMENTADO DE HEREDAR UNA CLASE SELLADA ──────────────────────────
-    //
-    // public class CerraduraAvanzada : CerraduraDigital   // ❌ Error CS0509
-    // {
-    //     public CerraduraAvanzada(string id, string nombre, int bateria, string tipo)
-    //         : base(id, nombre, bateria, tipo, 0) { }
-    // }
-    //
-    // El compilador rechaza esto:
-    // "cannot derive from sealed type 'CerraduraDigital'"
-    //
-    // SOLUCIÓN CORRECTA: usar composición (patrón Adapter).
-    // Crear una clase que contenga internamente una CerraduraDigital
-    // como campo, sin heredarla, preservando su lógica de seguridad intacta.
-    // ────────────────────────────────────────────────────────────────────────────
-}*/
