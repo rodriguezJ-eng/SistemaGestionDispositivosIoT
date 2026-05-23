@@ -11,20 +11,6 @@ public class Termostato : DispositivosIoT
         TemperaturaObjetivo = temperaturaInicial;
     }
 
-
-    public override void Configurar(string parametro)
-    {
-        if (double.TryParse(parametro, out double nuevaTemp))
-        {
-            TemperaturaObjetivo = nuevaTemp;
-            Console.WriteLine($"[{Nombre}]: Temperatura objetivo actualizada a {TemperaturaObjetivo} ºC.");
-        }
-        else
-        {
-            Console.WriteLine($"[{Nombre}]: Valor '{parametro}' no válido para temperatura");
-        }
-    }
-
     // Decidir que hacer con esto 
     public double TemperaturaObjetivo
     {
@@ -47,8 +33,20 @@ public class Termostato : DispositivosIoT
             }
         }
     }
+
+    public override void Configurar(string ModoOperacion)
+    {
+        Console.WriteLine($"[{Nombre}]: Modo de operación establecido a '{ModoOperacion}'.");
+    }
+
+    public override void Configurar(int valorTemperaturaObjetivo)
+    {
+        TemperaturaObjetivo = valorTemperaturaObjetivo;
+        Console.WriteLine($"[{Nombre}]: Temperatura objetivo actualizada a {TemperaturaObjetivo}ºC.");
+    }
+
     /// <summary>
-    /// ////////////////
+    /// Reporta el estado actual del termostato en la consola
     /// </summary>
     public override void ReportarEstado()
     {

@@ -1,4 +1,6 @@
-﻿/// <summary>
+﻿using System.Drawing;
+
+/// <summary>
 /// Representa una cámara de seguridad inteligente con control de resolución y grabación.
 /// Hereda de DispositivosIoT.
 ///
@@ -43,13 +45,38 @@ public class CamaraSeguridad : DispositivosIoT
         }
     }
 
-    // Configurar sellado 
-    // Esto garantiza que la lógica de asignación de zona sea siempre la misma
-    // en toda la familia de cámaras del sistema.
-    public sealed override void Configurar(string ubicacion)
+    /// <summary>
+    /// sealed porque la lógica de activar la grabación debe ser idéntica en todas las camaras
+    /// una subclase como CamaraSeguridad360 no puede cambiar cómo se inicia o detiene
+    /// la grabación, sino se comprometería la seguridad
+    /// </summary>
+    public sealed override void Configurar(string valor)
     {
-        Console.WriteLine($"[{Nombre}]: Zona de vigilancia asignada a '{ubicacion}'. Resolución: {Resolucion}MP.");
+        if (valor.ToLower() == "grabar")
+        {
+            Grabando = true;
+        }
+        else if (valor.ToLower() == "detener")
+        {
+            Grabando = false;
+        }
+        else
+        {
+            Console.WriteLine($"[{Nombre}]: Comando '{valor}' no reconocido. Use 'grabar' o 'detener'.");
+        }
     }
+
+    /// <summary>
+    /// sealed porque la resolución de grabación es un parámetro crítico
+    /// de seguridad que no debe ser alterado por ninguna subclase.
+    /// </summary>
+    public sealed override void Configurar(int valor)
+    {
+        Resolucion = valor;
+        Console.WriteLine($"[{Nombre}]: Resolución actualizada a {Resolucion}MP.");
+    }
+
+
 
     // Implementación del método abstracto
     public override void ReportarEstado()

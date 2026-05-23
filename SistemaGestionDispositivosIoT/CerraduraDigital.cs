@@ -16,7 +16,7 @@ public sealed class CerraduraDigital : DispositivosIoT
     public string TipoCierre
     {
         get => _tipoCierre;
-        set // (NUEVO: IMPLEMENTE UNA VALIDACIÓN)
+        set 
         {
             if (string.IsNullOrEmpty(value))
                 throw new ArgumentNullException("El tipo de cierre no puede estar vacío");
@@ -34,10 +34,9 @@ public sealed class CerraduraDigital : DispositivosIoT
         }
     }
 
-    // implementación del método Configuración (NUEVO)
-    public override void Configurar(string parametro)
+    public override void Configurar(string Tipo)
     {
-        TipoCierre = parametro;
+        TipoCierre = Tipo;
         Console.WriteLine($"[{Nombre}]: Tipo de cierre actualizado a '{TipoCierre}'.");
     }
 

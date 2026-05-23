@@ -6,7 +6,7 @@
 public class CamaraSeguridad360 : CamaraSeguridad
 {
     // Atributo propio 
-    private int _anguloVision; // en grados, máx 360
+    private int _anguloVision; 
 
     //  Constructor 
     public CamaraSeguridad360(string id, string nombre, int nivelBateria, int resolucion, int anguloVision)
@@ -27,22 +27,25 @@ public class CamaraSeguridad360 : CamaraSeguridad
         }
     }
 
-    //  Sobreescritura de ReportarEstado() 
+    // Sobreescritura de ReportarEstado() 
     // Esto SÍ está permitido: ReportarEstado() no fue sellado en CamaraSeguridad
     public override void ReportarEstado()
     {
         base.ReportarEstado(); // muestra el reporte base
+        Console.WriteLine("------------------------------------------------");
         Console.WriteLine($" [360°]: Ángulo de visión activo: {AnguloVision}°");
         Console.WriteLine("------------------------------------------------");
     }
 
     // INTENTO COMENTADO DE SOBREESCRIBIR UN MÉTODO SELLADO 
     /*
-    public override void Configurar(string ubicacion)  //  Error CS0239
+    public override void Configurar(string valor)  //  Error CS0239
     {
         Console.WriteLine("Intento de sobreescribir Configurar en 360...");
     }
     */
     // El compilador rechaza esto:
     // "No se puede invalidar el miembro heredado 'CamaraSeguridad.Configurar(string)' porque está sellado"
+
+
 }

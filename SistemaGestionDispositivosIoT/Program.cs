@@ -1,36 +1,4 @@
-﻿
-/*Console.WriteLine("--- DISPOSITIVOS IoT ---");
-
-DispositivosIoT[] misDispositivos = new DispositivosIoT[3];
-
-//  Inicialización de objetos
-misDispositivos[0] = new Termostato("T-01", "Termostato Inteligente", false, 70, 25.3);
-misDispositivos[1] = new LuzInteligente("L-02", "Luces de casa", true, 30, 55);
-misDispositivos[2] = new CerraduraDigital("C-03", "Cerradura Principal", true, 37, "Huella Dactilar", 4);
-
-string[] ubicaciones = { "Sala Principal", "Área Exterior", "Puerta de Entrada" };
-
-// Demostración con las sobrecargas
-for (int i = 0; i < misDispositivos.Length; i++)
-{
-    misDispositivos[i].Configurar();             // la que no tiene parametro
-    misDispositivos[i].Configurar(ubicaciones[i]); //la que tiene parametro string
-}
-
-Console.WriteLine("\n--- REPORTES DE ESTADO0 ---");
-
-
-for (int i = 0; i < misDispositivos.Length; i++)
-{
-    misDispositivos[i].ReportarEstado();
-}
-*/
-
-// 
-// CREACIÓN DE DISPOSITIVOS
-// 
-
-Separador("CREACIÓN DE DISPOSITIVOS");
+﻿Separador("CREACIÓN DE DISPOSITIVOS");
 
 var luz = new LuzInteligente("LUZ-001", "Luz Sala Principal", nivelBateria: 90, intensidadInicial: 70);
 var termostato = new Termostato("TERM-001", "Termostato Dormitorio", nivelBateria: 85, temperaturaInicial: 22.0);
@@ -55,13 +23,14 @@ termostato.Encender();
 cerradura.Encender();
 camara.Encender();
 camara360.Encender();
+Console.WriteLine();
 
 //
 // POLIMORFISMO — colección de tipo base
 // 
 Separador("POLIMORFISMO — ReportarEstado()");
 
-// Cada objeto en la lista es de tipo base DispositivosIoT,
+// Cada objeto en la lista es de tipo base de DispositivosIoT,
 // pero al llamar ReportarEstado() cada uno ejecuta SU propia versión.
 List<DispositivosIoT> dispositivos = new List<DispositivosIoT>
 {
@@ -72,35 +41,46 @@ foreach (var dispositivo in dispositivos)
 {
     dispositivo.ReportarEstado(); // polimorfismo
 }
+Console.WriteLine();
 
 // 
 // SOBRECARGA DE MÉTODOS — Configurar()
 // 
-Separador("SOBRECARGA — Configurar() sin parámetros vs con string");
+Separador("SOBRECARGA en Configurar() sin parámetros, con string y con int");
 
-Console.WriteLine(">> Configuración estándar (sin parámetros):");
+Console.WriteLine(" Configuración estándar (sin parámetros):");
 foreach (var dispositivo in dispositivos)
 {
     dispositivo.Configurar(); // Configurar() base — sobrecarga 1
 }
 
-Console.WriteLine("\n>> Configuración por ubicación (con string):");
-luz.Configurar("Sala de estar");           // override LuzInteligente
-termostato.Configurar("22.5");             // override Termostato -> temperatura
-cerradura.Configurar("Electromagnético");  // override CerraduraDigital -> tipo cierre
-camara.Configurar("Jardín trasero");       // sealed override CamaraSeguridad
-camara360.Configurar("Entrada principal"); // hereda el sealed, misma lógica
+// Sobrecarga 2: con string 
+Console.WriteLine("\nConfiguración con string:");
+luz.Configurar("Sala de estar");            // LuzInteligente - ubicación
+termostato.Configurar("Enfriamiento");      // Termostato - modo
+cerradura.Configurar("Electromagnético");   // CerraduraDigital - tipo de cierre
+camara.Configurar("grabar");            // inicia grabación 
+camara360.Configurar("detener");        // detiene grabación 
+
+// Sobrecarga 3: con int
+Console.WriteLine("\nConfiguración con int:");
+luz.Configurar(85);         // LuzInteligente - intensidad
+termostato.Configurar(24);  // Termostato - temperatura
+camara.Configurar(16);      // CamaraSeguridad - resolución (sealed)
+camara360.Configurar(8);    // hereda el sealed, misma lógica
+Console.WriteLine();
 
 // 
 // DEMOSTRACIÓN DEL sealed EN MÉTODO
 // 
-Separador("sealed EN MÉTODO — CamaraSeguridad vs CamaraSeguridad360");
+Separador("sealed EN MÉTODO — CamaraSeguridad y CamaraSeguridad360");
 
 Console.WriteLine("CamaraSeguridad360 puede sobreescribir ReportarEstado():");
 camara360.ReportarEstado();
 
-Console.WriteLine("Pero NO puede sobreescribir Configurar() — ver comentario en CamaraSeguridad.cs");
-// El intento comentado está dentro del archivo CamaraSeguridad.cs
+Console.WriteLine("Pero NO puede sobreescribir Configurar()  ver comentario en CamaraSeguridad360.cs");
+// El intento comentado está dentro del archivo CamaraSeguridad360.cs
+Console.WriteLine();
 
 // 
 // VALIDACIONES
@@ -114,7 +94,7 @@ Console.WriteLine("\nIntensidad fuera de rango (> 100):");
 luz.Intensidad = 150; // ajusta a 100 automáticamente
 
 Console.WriteLine("\nTemperatura fuera de rango (> 32°C):");
-termostato.Configurar("40"); // ajusta a 32°C automáticamente
+termostato.Configurar(40); // ajusta a 32°C automáticamente
 
 Console.WriteLine("\nTipoCierre vacío:");
 try { cerradura.Configurar(""); }
@@ -150,12 +130,15 @@ foreach (var dispositivo in dispositivos)
 }
 
 
-//  Utilidad visual 
+// Método para separar visualmente las impresiones en consola 
 static void Separador(string titulo)
 {
+    
     Console.WriteLine();
     Console.WriteLine(new string('=', 55));
+    Console.ForegroundColor = ConsoleColor.Green;
     Console.WriteLine($"  {titulo}");
+    Console.ResetColor();
     Console.WriteLine(new string('=', 55));
 }
 

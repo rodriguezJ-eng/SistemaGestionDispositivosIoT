@@ -32,16 +32,17 @@ public class LuzInteligente : DispositivosIoT
                 _intensidad = value;
             }
         }
-        }
-    //  Se sella el método para garantizar que ninguna subclase
-    //  futura altere la lógica estandarizada de ubicación.
-    // Nuevo
-    /*
-     * creare una nueva clase donde metere el sealed ahi (nuevo dispositivo)
-     */
+    }
+    
     public override void Configurar(string ubicacion)
     {
         Console.WriteLine($"[{Nombre}]: Intensidad regulada al {Intensidad}% y vinculada a: {ubicacion}.");
+    }
+
+    public override void Configurar(int valor)
+    {
+        Intensidad = valor;
+        Console.WriteLine($"[{Nombre}]: Intensidad ajustada al {Intensidad}%.");
     }
 
         public override void ReportarEstado()

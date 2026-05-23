@@ -14,3 +14,14 @@ public class CerraduraAvanzada : CerraduraDigital
  * 
  * 
  */
+
+/*
+ * Se sella la clase CerraduraDigital por seguridad muy Crítica
+ * una cerradura digital controla el acceso físico a el hogar, 
+ * entonces su comportamiento debe ser inmutable
+ * 
+ * Si se permitiera heredar esta clase, alguien podría intentar crear 
+ * una subclase maliciosa 
+ * sobreescribir  ReportarEstado(), mintiendo sobre su estado cerrada o abierta
+ * El diseño tiene como fin la extensión de forma intencional: 
+ */

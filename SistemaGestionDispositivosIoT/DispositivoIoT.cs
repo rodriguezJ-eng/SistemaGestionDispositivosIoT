@@ -11,13 +11,6 @@ public abstract class DispositivosIoT
     private bool _encendido;
     private int _nivelBateria;
 
-    /// <summary>
-    /// Correción se eliminó el parámetro 'encendido' porque siempre ignoraba la asignación
-    /// </summary>
-    /// <param name="id"></param>
-    /// <param name="nombre"></param>
-    /// <param name="encendido"></param>
-    /// <param name="nivelBateria"></param>
     protected DispositivosIoT(string id, string nombre, int nivelBateria)
     {
         Id = id;
@@ -97,20 +90,44 @@ public abstract class DispositivosIoT
         Console.WriteLine($"[{Nombre}] Dispositivo APAGADO");
     }
 
-    //Sobrecarga 1: Configuración estándar sin parámetro
+    /// <summary>
+    /// Sobrecarga 1: configuración estándar automática sin parámetros.
+    /// Es para establecer ajustes por defecto en cualquier dispositivo
+    /// </summary>
     public void Configurar()
     {
         Console.WriteLine($"[{Nombre}] Aplicando configuración automática estándar.");
     }
 
-    //Sobrecarga2: tenemos un metodo sobrecargado, sobre la Configuración personalizada segun el área de la casa o logar
-    //  donde se instale
-    public virtual void Configurar(string ubicacion)
+    /// <summary>
+    /// Sobrecarga 2: Configuración con valor de texto.
+    /// Cada Clase hija lo interpreta según su contexto: 
+    /// - Ubicación
+    /// - Modo de operar
+    /// - Tipo (ejemplo: tipo de cierre)
+    /// Creando su propia lógica sin romper el contrato de la clase base
+    /// </summary>
+    /// <param name="ubicacion"></param>
+    public virtual void Configurar(string valor)
     {
     
-        Console.WriteLine($"[{Nombre}] Registrado y optimizado para el área: {ubicacion}.");
+        Console.WriteLine($"[{Nombre}] Configurado con valor: {valor}.");
     }
-    
-    // Nuestro metodo abstracto
+
+    /// <summary>
+    /// Sobrecarga 3: Configuración con valor numérico (int)
+    /// Cada clase hija lo interpreta según su contexto:
+    /// - nivel de intesidad de luz
+    /// - nivel de temperatura
+    /// - resolución de camara
+    /// </summary>
+    public virtual void Configurar(int valor)
+    {
+        Console.WriteLine($"[{Nombre}] Configurado con valor numérico: {valor}.");
+    }
+
+    /// <summary>
+    /// Reporta el estado del dispositivo en consola
+    /// </summary>
     public abstract void ReportarEstado();
 }
