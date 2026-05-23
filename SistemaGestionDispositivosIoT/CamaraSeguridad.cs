@@ -1,13 +1,6 @@
-﻿using System.Drawing;
-
-/// <summary>
+﻿/// <summary>
 /// Representa una cámara de seguridad inteligente con control de resolución y grabación.
 /// Hereda de DispositivosIoT.
-///
-/// Configurar(string ubicacion) está SELLADO aquí porque la lógica de asignación
-/// de zona de vigilancia es crítica: una cámara mal ubicada lógicamente puede
-/// dejar puntos ciegos en la seguridad del hogar. Las subclases (como CamaraSeguridad360)
-/// no deben poder cambiar cómo se vincula la cámara a su área de cobertura.
 /// </summary>
 public class CamaraSeguridad : DispositivosIoT
 {

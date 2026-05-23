@@ -13,9 +13,7 @@ Console.WriteLine($"  - {cerradura.Nombre}");
 Console.WriteLine($"  - {camara.Nombre}");
 Console.WriteLine($"  - {camara360.Nombre}");
 
-// 
 // ENCENDIDO DE DISPOSITIVOS
-// 
 Separador("ENCENDIDO");
 
 luz.Encender();
@@ -25,12 +23,10 @@ camara.Encender();
 camara360.Encender();
 Console.WriteLine();
 
-//
-// POLIMORFISMO — colección de tipo base
-// 
+// POLIMORFISMO (Demuestre polimorfismo utilizando una colección de objetos del tipo base).
 Separador("POLIMORFISMO — ReportarEstado()");
 
-// Cada objeto en la lista es de tipo base de DispositivosIoT,
+// Cada objeto en la lista es de tipo base de DispositivosIoT, (Demuestre polimorfismo utilizando una colección de objetos del tipo base).
 // pero al llamar ReportarEstado() cada uno ejecuta SU propia versión.
 List<DispositivosIoT> dispositivos = new List<DispositivosIoT>
 {
@@ -43,9 +39,7 @@ foreach (var dispositivo in dispositivos)
 }
 Console.WriteLine();
 
-// 
 // SOBRECARGA DE MÉTODOS — Configurar()
-// 
 Separador("SOBRECARGA en Configurar() sin parámetros, con string y con int");
 
 Console.WriteLine(" Configuración estándar (sin parámetros):");
@@ -70,9 +64,7 @@ camara.Configurar(16);      // CamaraSeguridad - resolución (sealed)
 camara360.Configurar(8);    // hereda el sealed, misma lógica
 Console.WriteLine();
 
-// 
 // DEMOSTRACIÓN DEL sealed EN MÉTODO
-// 
 Separador("sealed EN MÉTODO — CamaraSeguridad y CamaraSeguridad360");
 
 Console.WriteLine("CamaraSeguridad360 puede sobreescribir ReportarEstado():");
@@ -82,9 +74,8 @@ Console.WriteLine("Pero NO puede sobreescribir Configurar()  ver comentario en C
 // El intento comentado está dentro del archivo CamaraSeguridad360.cs
 Console.WriteLine();
 
-// 
+
 // VALIDACIONES
-// 
 Separador("VALIDACIONES");
 
 Console.WriteLine("Batería fuera de rango (negativa):");
@@ -104,9 +95,8 @@ Console.WriteLine("\nResolución inválida (> 64MP):");
 try { camara.Resolucion = 100; }
 catch (ArgumentOutOfRangeException ex) { Console.WriteLine($"Excepción capturada: {ex.ParamName}"); }
 
-// 
+
 // GRABACIÓN — CamaraSeguridad
-// 
 Separador("GRABACIÓN DE CÁMARAS");
 
 camara.Grabando = true;
@@ -119,9 +109,8 @@ camara360.ReportarEstado();
 camara.Grabando = false;
 camara360.Grabando = false;
 
-// 
+
 // APAGADO DEL SISTEMA
-// 
 Separador("APAGADO DEL SISTEMA");
 
 foreach (var dispositivo in dispositivos)
@@ -133,7 +122,6 @@ foreach (var dispositivo in dispositivos)
 // Método para separar visualmente las impresiones en consola 
 static void Separador(string titulo)
 {
-    
     Console.WriteLine();
     Console.WriteLine(new string('=', 55));
     Console.ForegroundColor = ConsoleColor.Green;

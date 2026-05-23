@@ -1,5 +1,4 @@
-﻿// Intento de heredar una clase sellada
-
+﻿// INTENTO COMENTADO DE HEREDAR DE UNA CLASE SELLADA
 /*
 public class CerraduraAvanzada : CerraduraDigital
 {

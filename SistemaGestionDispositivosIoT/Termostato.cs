@@ -11,7 +11,6 @@ public class Termostato : DispositivosIoT
         TemperaturaObjetivo = temperaturaInicial;
     }
 
-    // Decidir que hacer con esto 
     public double TemperaturaObjetivo
     {
         get => _temperaturaObjetivo;

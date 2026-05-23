@@ -1,8 +1,4 @@
-﻿/// <summary>
-/// Clase hija heredada de dispositivosIot agregando un atributo propio de esta clase 
-/// </summary>
-
-public class LuzInteligente : DispositivosIoT
+﻿public class LuzInteligente : DispositivosIoT
     {
         private int _intensidad;
 

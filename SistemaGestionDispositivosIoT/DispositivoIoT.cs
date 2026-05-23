@@ -5,7 +5,6 @@
 
 public abstract class DispositivosIoT
 {
-    // atributos
     private string _id;
     private string _nombre;
     private bool _encendido;
@@ -19,7 +18,6 @@ public abstract class DispositivosIoT
         NivelBateria = nivelBateria;
     }
 
-    // propiedades y validaciones
     public string Id
     {
         get => _id;
@@ -48,8 +46,7 @@ public abstract class DispositivosIoT
         protected set => _encendido = value;
     }
 
-    
-        public int NivelBateria
+    public int NivelBateria
     {
         get => _nivelBateria;
         set
@@ -69,10 +66,8 @@ public abstract class DispositivosIoT
                 _nivelBateria = value;
             }
         }
-    
-}
+    }
 
-    // Métodos
     public void Encender()
     {
         if (NivelBateria == 0)

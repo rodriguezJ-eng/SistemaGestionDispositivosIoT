@@ -1,6 +1,7 @@
 ﻿
-    // Se sella la clase por seguridad crítica,
-    // impidiendo herencia para evitar alteraciones en el control de acceso.
+// Se sella la clase por seguridad crítica,
+// impidiendo herencia para evitar alteraciones en el control de acceso.
+// Revisar intento de herencia comentado en CerraduraAvanzada.cs
 public sealed class CerraduraDigital : DispositivosIoT
 {
     private string _tipoCierre;
